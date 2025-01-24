@@ -38,11 +38,9 @@ function App(){
        alert("OTP is 3333")
      }
      
-  
-      else {
+     else {
        alert("invalid credentials")
-
-  }
+    }
 };
  
 

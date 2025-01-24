@@ -9,6 +9,8 @@ export default function Otp({handlelogin1}) {
     const refs=[useRef(),useRef(),useRef(),useRef()]
     const [inputs,setInputs]=useState(emptyinput);
     const [Empty, setEmpty]=useState(emptyinput);
+    const [time, setTime] = useState(20);
+    const [intervalId, setIntervalId] = useState();
   
     
   // Use to focus particular input box  
@@ -92,6 +94,25 @@ export default function Otp({handlelogin1}) {
 
   }
 
+  const reduceTime = () => {
+    
+    if (intervalId) return;
+
+    const localIntervalId = setInterval(() => { 
+      if(time <= 0){
+        clearInterval(intervalId);
+        setInterval(null)
+        return;
+      }
+        
+      setTime(prevVal => prevVal - 1)
+    }, 1000)
+    setIntervalId(localIntervalId);
+  }
+
+  useEffect(() => {
+    reduceTime();
+  }, [])
 
 
   return (
@@ -107,7 +128,7 @@ export default function Otp({handlelogin1}) {
         </div>
 
         <div className="otpbox">
-           <div className='timer'><p>Resend code in o.20 </p></div>
+           <div className='timer'><p>Resend code in {time}</p></div>
            <form onSubmit={(e)=>{handlesubmit(e)}}>
            <div className="input">
            { emptyinput.map((item, i)=>{

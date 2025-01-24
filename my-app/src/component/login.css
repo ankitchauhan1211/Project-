@@ -3,11 +3,11 @@
     padding: 0px;
 }
 body,html{
-    background-color: rgba(244, 242, 238, 0.937);
+    background-color: #f7f7f7;
 }
 .login_top{
     display: flex;
-    background-color: rgba(244, 242, 238, 0.755);
+    background-color: #f7f7f7;
     flex-direction: column;
     align-items: center;
     justify-content: center;
