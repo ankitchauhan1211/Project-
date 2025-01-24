@@ -1,0 +1,47 @@
+.logout_top{
+    width: 100%;
+    height: 700px;
+    background-color: #1c1c1c;
+    color: #fff;
+   
+    
+
+
+}
+.logout{
+    width: 100%;
+    height: 50px;
+    background-color: rgb(244, 248, 246);
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: space-between; */
+
+
+
+
+
+}
+.logout_button{
+    margin-left: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    
+
+    
+}
+.logout_button button{
+    border: none;
+    background-color: rgb(245, 177, 52);
+    height: 40px;
+    width: 70px;
+    border-radius: 10px;
+    margin-top: 4px;
+}
+.logout_button div{
+    margin-top: 20px;
+    margin-right: 20px;
+    color: #1c1c1c;
+}
