@@ -2,23 +2,30 @@ import { useContext, useEffect, useState } from "react";
 import Login from "./component/login";
 import Otp from "./component/otp";
 import Logout from "./component/logout";
-import { AuthContext } from "./context/contextapi";
-import { setLocalstorage } from "./localstorage/localstorage";
 
 
 
-
- 
 function App(){
-// use to get data from local storage
-  useEffect(()=>{
-    setLocalstorage();
-  },[])
- 
-  const [user,setUser]=useState(null);
-  const data = useContext(AuthContext) ;
 
-  console.log()
+  const [log,setLog]=useState(false);
+  const [user,setUser]=useState(null);
+  const [num,setNum]=useState('')
+
+  const number=localStorage.getItem('number')
+  const otp=localStorage.getItem('otp')
+  useEffect(()=>{
+  if(number && otp){
+    setLog(true)
+    setUser("otp")
+   
+    
+  }
+
+  
+},[])
+
+
+
 
   
  
@@ -26,47 +33,38 @@ function App(){
 
   const handlelogin =(number)=>{
 
-     if(number==`${data.number[0].number1}`){
-       setUser('number')
-         
-         alert("OTP is 9999")
-      }
-
-     if(number==`${data.number[0].number2}`){
-      setUser('number')
-       
-       alert("OTP is 3333")
-     }
-     
-     else {
-       alert("invalid credentials")
-    }
-};
- 
-
+  if(number.length==10){
+    setUser('number')
+    setNum(number)
+    localStorage.setItem('number',number)
+  
+  }
+  
+  };
+   
   const  handlelogin1 =(otp)=>{
-      
-     if(otp==`${data.data[0].otp1}`){
+     const otps=JSON.stringify(otp)
+     if(otps.length===4){
+      console.log('papa')
+    
       setUser('otp')
-      console.log(otp)
+      localStorage.setItem('otp',otp)
+    }
+     else{
+      setUser('number')
      }
-     if(otp==`${data.data[0].otp2}`){
-      setUser('otp')
-      console.log(otp)
-     }
-  } 
+
+  };
+  
+   
+
   const handlelogout =(val)=>{
       if(val==null){
         setUser(null)
+        localStorage.clear()
         console.log(val)
       }
-  
-    }
-
-
-
-  
-
+    };
 
 return(
 
@@ -74,17 +72,10 @@ return(
   <>
 { !user ? <Login  handlelogin={handlelogin}/> : ''}
 {user=='number' ? <Otp handlelogin1={handlelogin1}/> : ''}
-{user=="otp" ? <Logout handlelogout={handlelogout}/> : ''}
+{user=="otp"  ? <Logout handlelogout={handlelogout}/> : ''}
 
 
- 
-
- 
-
-
-
-  </>
-  );
+  </> );
 
 
  

@@ -10,10 +10,23 @@ export default function Otp({handlelogin1}) {
     const [inputs,setInputs]=useState(emptyinput);
     const [Empty, setEmpty]=useState(emptyinput);
     const [time, setTime] = useState(20);
-    const [intervalId, setIntervalId] = useState();
+    const [style,setStyle]=useState('black');
+    const [border,setColor]=useState('1px solid #1c1c1c23');
+    
+    const numberdata=localStorage.getItem('number');
   
     
-  // Use to focus particular input box  
+   const Changeotp = ()=>{
+    if(time==0){
+      console.log('ankit')
+      // localStorage.setItem('otp',JSON.stringify(6666))
+      alert('resend otp is 6666')
+        }
+
+     }
+    
+
+    // Use to focus particular input box  
     useEffect(()=>{
        
       refs[0].current.focus();
@@ -22,30 +35,37 @@ export default function Otp({handlelogin1}) {
 
   const handlesubmit = (e)=>{
     e.preventDefault()
-    const missed = inputs.map((item , i)=>{
-      if(item === ''){
-        return i;}
-    
-    }).filter((item ) => (item || item === 0));
-    //  use to get missing box that we not enter any data
-    setEmpty(missed);  
+    const empty = Empty.join('')
+    console.log(empty)
+   
+    Empty.forEach((i)=>{
+      console.log(i)
+      console.log([i]) 
+      if (inputs[i] === ''){
+           setColor('1px solid red')
+      }
+      else{
 
-  
+         setColor('1px solid  green')
+         }
+      }
+    ); 
+
   //  use data to map data nad get a data in number form
-    const data = inputs.map(Number)
-    const num= parseInt(data.join(''))
+    
+    
+  
+    const num= parseInt(inputs.join(''))
+
+    // console.log(num)
   // use to send data to app.js file
     handlelogin1(num)
     
-    
-    
-    
-  }
+};
 
-   const handelinput=( e,index)=>{
-    const value =e.target.value;
+const handelinput=( e,index)=>{
+    const value =e.target.value  ;
     
-
     if(!Number(value))
         return ;
     
@@ -55,15 +75,28 @@ export default function Otp({handlelogin1}) {
 
     };
     
-
     const copyinputs=[...inputs];
     copyinputs[index]=value;
-    setInputs(copyinputs)
+     setInputs(copyinputs)
+
+    const missed = inputs.map((item, i)=>{
+      console.log(item)
+         if(item=== ''){
+             return i ;
+            }
+    
+    }).filter((item)=>( item || item === 0));
+
+    //  use to get missing box that we not enter any data
+    
+    // console.log('missed items is ', missed)
+     setEmpty(missed) 
+   
 
 
    };
 
-   const handonkeydown=(e,i)=>{
+const handonkeydown=(e,i)=>{
     
     
     if(e.keyCode===8){
@@ -92,30 +125,32 @@ export default function Otp({handlelogin1}) {
     refs[inputs.length - 1].current.focus();
    
 
+  };
+
+  
+useEffect(()=>{
+  const intervalid=setInterval(()=>{
+    if(time==0){
+      setStyle('red')
+    }
+    if(time> 0){
+      setTime(time -1);
+
+    }
+    else{
+       clearInterval(intervalid)
+    }
+  },1000);
+  return ()=>{
+    clearInterval(intervalid)
   }
-
-  const reduceTime = () => {
-    
-    if (intervalId) return;
-
-    const localIntervalId = setInterval(() => { 
-      if(time <= 0){
-        clearInterval(intervalId);
-        setInterval(null)
-        return;
-      }
-        
-      setTime(prevVal => prevVal - 1)
-    }, 1000)
-    setIntervalId(localIntervalId);
-  }
-
-  useEffect(() => {
-    reduceTime();
-  }, [])
+ 
+},[time])
 
 
   return (
+      <>
+  <div className="topmain">
     <div className='otp_top'>
         <div className="otp_image">
             <img src={login} alt="" />
@@ -123,7 +158,7 @@ export default function Otp({handlelogin1}) {
 
         <div className="textarea">
             <h1>We've send you a code </h1>
-            <h6>the code was sent to <b>ankit chuahan</b> </h6>
+            <h6>the code was sent to <b>{numberdata}</b> </h6>
 
         </div>
 
@@ -143,13 +178,14 @@ export default function Otp({handlelogin1}) {
             onKeyDown={(e)=>handonkeydown(e,i)}
             onPaste={handlepast}
             className = {Empty.includes(i) ? 'error1' : '' }
+            style={{border: border}}
             />
            }
 
            )} </div>
           
-           <button >Submit OTP</button> 
-           <h6 ><a href='' >Click to Resend OTP</a></h6> 
+           <button  >Submit OTP</button> 
+           <div className="resend" onClick={Changeotp} ><h6  style={{ color : style} }>Click to Resend OTP</h6> </div>
            </form>
         </div>
 
@@ -158,5 +194,7 @@ export default function Otp({handlelogin1}) {
 
       
     </div>
+    </div>
+    </>
   )
 }

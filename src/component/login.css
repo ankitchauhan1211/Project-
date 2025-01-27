@@ -2,6 +2,13 @@
     margin: 0px;
     padding: 0px;
 }
+.loginmaintop{
+    background-color: rgb(251, 255, 255);
+    width: 100%;
+    height: 700px;
+    display: flex;
+    justify-content: center;
+}
 body,html{
     background-color: #f7f7f7;
 }
@@ -11,7 +18,7 @@ body,html{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%;
+    width: 350px;
     height: 700px;
 }
 .image{
@@ -27,10 +34,15 @@ body,html{
     
     
 }
+.textbox h1{
+    font-size: 1.5rem;
+}
 .textbox h6{
+    font-size: 0.9rem;
     text-align: center;
     
 }
+
 .textbox div{
     text-align: center;
 }
@@ -43,35 +55,58 @@ body,html{
 }
 .inputbox h5{
     margin-left: 10px;
+    font-size: 1rem;
 
 }
 .inputbox input{
+
     border: none;
     height: 40px;
-    border-radius: 20px;
+    border-radius: 10px;
     padding: 9px;
     color: black;
-    font-weight: bold;
     border: 1px solid #1c1c1c;
+    padding: 20px;
+    background-color: #1c1c1c13;
+    
 
 }
-.inputbox input:focus{
-    border: 1px solid rgb(233, 178, 78);
+#phone{
+    border: none;
+    color: #1c1c1c;
+}
+.inputbox #phone:focus{
+  
+    outline: 1px solid  #1c1c1c23;
 
 }
 
-.inputbox input :hover{ 
-    border: 1px solid rgb(233, 178, 78);
-}
+/* .inputbox #phone:hover{ 
+    border: 1px solid rgba(19, 19, 19, 0.105);
+} */
 
 .inputbox button{
-    margin-top: 8px;
+    margin-top: 23px;
     border: none;
-    border-radius: 20px;
+    border-radius: 10px;
     height: 40px;
-
-    background-color: rgba(255, 166, 0, 0.821);
+    background-color: #1c1c1c66;
+    /* background-color: rgba(255, 166, 0, 0.821); */
     color: #fff;
     font-weight: bold;
 }
+.buttonform{
+    margin-top: 30px;
+}
+.text{
+    margin-top: 5px;
+}
 
+.background{
+    background-color: rgba(255,166,0,0.821);
+}
+.border{
+    color: red;
+    font-size: 15px;
+    border: none;
+}
