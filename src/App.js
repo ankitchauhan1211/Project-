@@ -17,8 +17,10 @@ function App(){
   if(number && otp){
     setLog(true)
     setUser("otp")
-   
     
+  }
+  if(number){
+    setUser("number")
   }
 
   
@@ -43,8 +45,10 @@ function App(){
   };
    
   const  handlelogin1 =(otp)=>{
+    localStorage.getItem("otp",9999)
      const otps=JSON.stringify(otp)
-     if(otps.length===4){
+    //  otps.length===4
+     if(otp==9999){
       console.log('papa')
     
       setUser('otp')
