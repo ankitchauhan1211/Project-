@@ -45,17 +45,21 @@ function App(){
   };
    
   const  handlelogin1 =(otp)=>{
-    localStorage.getItem("otp",9999)
-     const otps=JSON.stringify(otp)
+    // localStorage.getItem("otp",9999)
+    
+    //  const otps=JSON.stringify(otp)
     //  otps.length===4
      if(otp==9999){
       console.log('papa')
-    
       setUser('otp')
       localStorage.setItem('otp',otp)
     }
-     else{
-      setUser('number')
+  //  localStorage.setItem('otp',6666)
+     
+    else{
+      localStorage.setItem('otp',6666)
+      setUser('otp')
+
      }
 
   };
