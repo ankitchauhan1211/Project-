@@ -5,7 +5,7 @@ import Logout from "./component/logout";
 
 
 
-function App(){
+function App( {numberdash}){
 
   const [log,setLog]=useState(false);
   const [user,setUser]=useState(null);
@@ -13,17 +13,13 @@ function App(){
 
   const number=localStorage.getItem('number')
   const otp=localStorage.getItem('otp')
+  console.log(number,otp,"snbadv")
   useEffect(()=>{
-  if(number && otp){
-    setLog(true)
-    setUser("otp")
-    
-  }
-  if(number){
-    setUser("number")
-  }
-
+   if(number && otp){
   
+    setUser("otp") 
+  }
+ 
 },[])
 
 
@@ -35,9 +31,8 @@ function App(){
 
   const handlelogin =(number)=>{
 
-  if(number.length==10){
+if(number.length==10){
     setUser('number')
-    setNum(number)
     localStorage.setItem('number',number)
   
   }
@@ -45,28 +40,22 @@ function App(){
   };
    
   const  handlelogin1 =(otp)=>{
-    // localStorage.getItem("otp",9999)
     
-    //  const otps=JSON.stringify(otp)
-    //  otps.length===4
      if(otp==9999){
       console.log('papa')
       setUser('otp')
       localStorage.setItem('otp',otp)
     }
-  //  localStorage.setItem('otp',6666)
-     
+  
     else{
-      localStorage.setItem('otp',6666)
-      setUser('otp')
+       localStorage.setItem('otp',otp)
+       setUser('otp')
 
-     }
+     };
 
   };
   
-   
-
-  const handlelogout =(val)=>{
+const handlelogout =(val)=>{
       if(val==null){
         setUser(null)
         localStorage.clear()
@@ -74,12 +63,20 @@ function App(){
       }
     };
 
+    const Numberdash=(value)=>{
+      localStorage.clear()
+      setUser(null)
+      
+
+    }
+   
+
 return(
 
 
   <>
-{ !user ? <Login  handlelogin={handlelogin}/> : ''}
-{user=='number' ? <Otp handlelogin1={handlelogin1}/> : ''}
+{ !user ? <Login  handlelogin={handlelogin} /> : ''}
+{user=='number' ? <Otp handlelogin1={handlelogin1} Numberdash={Numberdash}/> : ''}
 {user=="otp"  ? <Logout handlelogout={handlelogout}/> : ''}
 
 

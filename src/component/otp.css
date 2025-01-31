@@ -107,4 +107,7 @@ body,html{
     border: 1px solid red;
 }
 
+.timer p{
+    cursor: pointer;
+}
 

@@ -3,7 +3,7 @@ import './otp.css';
 import login from './login.jpg';
 
 
-export default function Otp({handlelogin1}) {
+export default function Otp({handlelogin1,Numberdash}) {
 
     const emptyinput=['','','','']
     const refs=[useRef(),useRef(),useRef(),useRef()]
@@ -80,7 +80,6 @@ const handelinput=( e,index)=>{
      setInputs(copyinputs)
 
     const missed = inputs.map((item, i)=>{
-      console.log(item)
          if(item=== ''){
              return i ;
             }
@@ -146,6 +145,9 @@ useEffect(()=>{
   }
  
 },[time])
+ const changenumber=()=>{
+   Numberdash(null)
+ }
 
 
   return (
@@ -163,7 +165,7 @@ useEffect(()=>{
         </div>
 
         <div className="otpbox">
-           <div className='timer'><p>Resend code in {time}</p></div>
+           <div className='timer' onClick={Changeotp} ><p style={{ color : style} } >Resend code in {time}</p></div>
            <form onSubmit={(e)=>{handlesubmit(e)}}>
            <div className="input">
            { emptyinput.map((item, i)=>{
@@ -185,7 +187,7 @@ useEffect(()=>{
            )} </div>
           
            <button  >Submit OTP</button> 
-           <div className="resend" onClick={Changeotp} ><h6  style={{ color : style} }>Click to Resend OTP</h6> </div>
+           <div className="resend"  onClick={changenumber}><h6>Click to change phone number</h6> </div>
            </form>
         </div>
 
