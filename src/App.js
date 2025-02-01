@@ -16,9 +16,12 @@ function App( {numberdash}){
   console.log(number,otp,"snbadv")
   useEffect(()=>{
    if(number && otp){
-  
-    setUser("otp") 
+      setUser("otp") 
   }
+  else if(number){
+    setUser('number')
+  }
+  
  
 },[])
 

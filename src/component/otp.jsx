@@ -17,11 +17,13 @@ export default function Otp({handlelogin1,Numberdash}) {
   
     
    const Changeotp = ()=>{
+
     if(time==0){
       console.log('ankit')
       // localStorage.setItem('otp',JSON.stringify(6666))
       alert('resend otp is 6666')
         }
+      window.location.href='/otp.jsx'
 
      }
     
@@ -126,12 +128,13 @@ const handonkeydown=(e,i)=>{
 
   };
 
-  
+
 useEffect(()=>{
   const intervalid=setInterval(()=>{
     if(time==0){
       setStyle('red')
     }
+
     if(time> 0){
       setTime(time -1);
 
@@ -145,6 +148,9 @@ useEffect(()=>{
   }
  
 },[time])
+
+
+
  const changenumber=()=>{
    Numberdash(null)
  }
