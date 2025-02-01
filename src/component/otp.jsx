@@ -22,8 +22,9 @@ export default function Otp({handlelogin1,Numberdash}) {
       console.log('ankit')
       // localStorage.setItem('otp',JSON.stringify(6666))
       alert('resend otp is 6666')
-        }
       window.location.href='/otp.jsx'
+        }
+     
 
      }
     
