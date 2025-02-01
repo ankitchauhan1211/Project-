@@ -50,7 +50,7 @@ if(number.length==10){
       localStorage.setItem('otp',otp)
     }
   
-    else if(otp.length==4){
+    else if(otp==6666){
        localStorage.setItem('otp',otp)
        setUser('otp')
 
