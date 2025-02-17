@@ -10,10 +10,10 @@ export default function Login({handlelogin}) {
   const [error,setError]= useState(null);
 
   
-  // const numstart = number.split('')
-  // if(numstart[0]<=5){
-  //    setNumber('')
-  // }
+  const numstart = number.split('')
+  if(numstart[0]<=5){
+     setNumber('')
+  }
   
 
   const Change=(e)=>{
@@ -27,8 +27,6 @@ export default function Login({handlelogin}) {
           }
    
   }
-
-
  
 
 
@@ -39,25 +37,36 @@ export default function Login({handlelogin}) {
     
   
     setNumber('')
-    
   }
   
-  const submit =()=>{
-   
-    
-    
-    if (isNaN(number)){
-       setError("error: input should me a number")
-    }
-    else{
-    
-      handlelogin(number)
-    }
-
+  const submit =async ()=>{
   // localStorage.setItem('number',number)
   // localStorage.setItem('otp',JSON.stringify(otp))
-    
-  
+
+            try {
+                  const response = await fetch('http://vts.techveda.consulting/api/auth/user/login', {
+                      method: 'POST',
+                      headers: { 'Content-Type' : 'application/json'}, //no content type for body of type FormData
+                      body: JSON.stringify({phone_number : number})
+                  });
+                  const data = await response.json();
+                  console.log(data)
+                  
+                  if(!response.ok){
+                      throw new Error(data.message || "Invalid response");
+                  }
+                  localStorage.setItem('token', data.json.data.identification_token);
+                   const token=localStorage.getItem('token')
+                   console.log("token",token)
+          
+                  console.log(data);
+              } catch (error) {
+                  console.log(error.message);
+              }
+    handlelogin(number)
+
+              // 9999223772 phone number to call
+
   };
 
   return (
@@ -76,7 +85,8 @@ export default function Login({handlelogin}) {
         <form onSubmit={(e)=>submithandler(e)} className='buttonform'>
                 <div className="inputbox">
                     <h5>Phone Number</h5>
-                  <input required  type='tel'  id='phone' pattern="[6-9]\d{9}"  value={number}  onChange={Change} placeholder='Enter your Number' maxLength = {10} />
+                      
+                   <input required  type='tel'  id='phone' pattern="[6-9]\d{9}"  value={number}  onChange={Change} placeholder='Enter your Number' maxLength = {10} />
                    {error && <p className='border' >{error}</p>}
                     <button onClick={submit} style={{backgroundColor: color}}>Send OTP</button>
                  </div>

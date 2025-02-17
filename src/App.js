@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import Login from "./component/login";
 import Otp from "./component/otp";
 import Logout from "./component/logout";
+import Call from "./component/call/call";
 
 
 
@@ -13,7 +14,7 @@ function App( {numberdash}){
 
   const number=localStorage.getItem('number')
   const otp=localStorage.getItem('otp')
-  console.log(number,otp,"snbadv")
+  
   useEffect(()=>{
    if(number && otp){
       setUser("otp") 
@@ -32,7 +33,11 @@ function App( {numberdash}){
  
   // condition for data entry is number and otp combination 
 
-  const handlelogin =(number)=>{
+  const handlelogin = (number)=>{
+    
+       
+
+
 
 if(number.length==10){
     setUser('number')
@@ -44,17 +49,17 @@ if(number.length==10){
    
   const  handlelogin1 =(otp)=>{
     
-     if(otp==9999){
-      console.log('papa')
+     if(otp==1234){
+      // console.log('papa')
       setUser('otp')
       localStorage.setItem('otp',otp)
     }
   
-    else if(otp==6666){
-       localStorage.setItem('otp',otp)
-       setUser('otp')
+    // else if(otp==6666){
+    //    localStorage.setItem('otp',otp)
+    //    setUser('otp')
 
-     };
+    //  };
 
   };
   
@@ -72,6 +77,25 @@ const handlelogout =(val)=>{
       
 
     }
+
+const handleclick=(val)=>{
+
+ const  value=parseInt(val)
+//  console.log(typeof(value))
+
+   if(isNaN(value)){
+    console.log('your input is invalid or not a numbar')
+
+   }
+   else{
+       console.log(value*2)
+   }
+
+
+}
+
+
+
    
 
 return(
@@ -81,6 +105,8 @@ return(
 { !user ? <Login  handlelogin={handlelogin} /> : ''}
 {user=='number' ? <Otp handlelogin1={handlelogin1} Numberdash={Numberdash}/> : ''}
 {user=="otp"  ? <Logout handlelogout={handlelogout}/> : ''}
+{/* <Call handleclick={handleclick}></Call> */}
+
 
 
   </> );

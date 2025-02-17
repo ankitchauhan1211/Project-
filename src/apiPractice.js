@@ -24,7 +24,7 @@
 //             method: 'POST',
 //             headers: { 'Content-Type' : 'application/json'}, //no content type for body of type FormData
 //             body: JSON.stringify(myProduct)
-//         });4
+//         });
 //         const data = await response.json();
         
 //         if(!response.ok){
@@ -94,5 +94,4 @@
 // }
 
 // getUserInfo();
-
 

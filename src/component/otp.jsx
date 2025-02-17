@@ -7,6 +7,7 @@ export default function Otp({handlelogin1,Numberdash}) {
 
     const emptyinput=['','','','']
     const refs=[useRef(),useRef(),useRef(),useRef()]
+    // console.log(refs)
     const [inputs,setInputs]=useState(emptyinput);
     const [Empty, setEmpty]=useState(emptyinput);
     const [time, setTime] = useState(20);
@@ -36,10 +37,10 @@ export default function Otp({handlelogin1,Numberdash}) {
 
     },[]);
 
-  const handlesubmit = (e)=>{
+  const handlesubmit = async (e)=>{
     e.preventDefault()
     const empty = Empty.join('')
-    console.log(empty)
+    // console.log(empty)
    
     Empty.forEach((i)=>{
       console.log(i)
@@ -60,14 +61,38 @@ export default function Otp({handlelogin1,Numberdash}) {
   
     const num= parseInt(inputs.join(''))
 
+
     // console.log(num)
   // use to send data to app.js file
+  const token=localStorage.getItem('token')
+  console.log(token)
+  try {
+    const response = await fetch('http://vts.techveda.consulting/api/auth/user/submit_otp', {
+        method: 'POST',
+        headers: { 'Content-Type' : 'application/json'}, //no content type for body of type FormData
+        body: JSON.stringify({ identification_token : token,
+          otp:  num.toString(),
+        })
+    });
+    const data = await response.json();
+    console.log(data)
+    
+    if(!response.ok){
+        throw new Error(data.message || "Invalid response");
+    }
+    // localStorage.setItem('token1', data.json.data.identification_token);
+    console.log(data);
+} catch (error) {
+    console.log(error.message);
+}
+
+
     handlelogin1(num)
     
 };
 
 const handelinput=( e,index)=>{
-    const value =e.target.value  ;
+    const value =e.target.value ;
     
     if(!Number(value))
         return ;
@@ -114,6 +139,7 @@ const handonkeydown=(e,i)=>{
 
   const handlepast = (e) =>{
 
+    
     const data = e.clipboardData.getData('text');
     
     
@@ -170,6 +196,7 @@ useEffect(()=>{
             <h6>the code was sent to <b>{numberdata}</b> </h6>
 
         </div>
+
 
         <div className="otpbox">
            <div className='timer' onClick={Changeotp} ><p style={{ color : style} } >Resend code in {time}</p></div>
