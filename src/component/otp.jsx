@@ -15,7 +15,7 @@ export default function Otp({handlelogin1,Numberdash}) {
     const [border,setColor]=useState('1px solid #1c1c1c23');
     
     const numberdata=localStorage.getItem('number');
-  
+
     
    const Changeotp = ()=>{
 
@@ -43,7 +43,7 @@ export default function Otp({handlelogin1,Numberdash}) {
     // console.log(empty)
    
     Empty.forEach((i)=>{
-      console.log(i)
+      // console.log(i)
       console.log([i]) 
       if (inputs[i] === ''){
            setColor('1px solid red')
@@ -62,32 +62,34 @@ export default function Otp({handlelogin1,Numberdash}) {
     const num= parseInt(inputs.join(''))
 
 
-    // console.log(num)
   // use to send data to app.js file
   const token=localStorage.getItem('token')
   console.log(token)
+  if(num.toString().length==4){
   try {
     const response = await fetch('http://vts.techveda.consulting/api/auth/user/submit_otp', {
         method: 'POST',
         headers: { 'Content-Type' : 'application/json'}, //no content type for body of type FormData
         body: JSON.stringify({ identification_token : token,
-          otp:  num.toString(),
+        otp:  num.toString() ,
         })
     });
     const data = await response.json();
     console.log(data)
     
     if(!response.ok){
-        throw new Error(data.message || "Invalid response");
+        throw new Error(alert(data.message) || alert("Invalid response"));
     }
     // localStorage.setItem('token1', data.json.data.identification_token);
-    console.log(data);
+    localStorage.setItem('otp',num)
+    // console.log(data);
+    handlelogin1()
 } catch (error) {
     console.log(error.message);
 }
 
-
-    handlelogin1(num)
+}
+   
     
 };
 

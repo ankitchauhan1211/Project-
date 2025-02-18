@@ -14,6 +14,10 @@ function App( {numberdash}){
 
   const number=localStorage.getItem('number')
   const otp=localStorage.getItem('otp')
+
+
+
+  
   
   useEffect(()=>{
    if(number && otp){
@@ -33,35 +37,30 @@ function App( {numberdash}){
  
   // condition for data entry is number and otp combination 
 
-  const handlelogin = (number)=>{
+  const handlelogin = (token,number)=>{
     
-       
+       console.log(token)
 
-
-
-if(number.length==10){
-    setUser('number')
+  if(token){
+    
+    localStorage.setItem('token',token)
     localStorage.setItem('number',number)
+    setUser('number')
+
   
   }
   
   };
    
-  const  handlelogin1 =(otp)=>{
+  const  handlelogin1 =()=>{
     
-     if(otp==1234){
-      // console.log('papa')
       setUser('otp')
-      localStorage.setItem('otp',otp)
+
     }
   
-    // else if(otp==6666){
-    //    localStorage.setItem('otp',otp)
-    //    setUser('otp')
+    
 
-    //  };
-
-  };
+  
   
 const handlelogout =(val)=>{
       if(val==null){
@@ -74,31 +73,32 @@ const handlelogout =(val)=>{
     const Numberdash=(value)=>{
       localStorage.clear()
       setUser(null)
+
       
 
     }
 
-const handleclick=(val)=>{
+// const handleclick=(val)=>{
 
- const  value=parseInt(val)
-//  console.log(typeof(value))
+//  const  value=parseInt(val)
+// //  console.log(typeof(value))
 
-   if(isNaN(value)){
-    console.log('your input is invalid or not a numbar')
+//    if(isNaN(value)){
+//     console.log('your input is invalid or not a numbar')
 
-   }
-   else{
-       console.log(value*2)
-   }
+//    }
+//    else{
+//        console.log(value*2)
+//    }
 
 
-}
+// }
 
 
 
    
 
-return(
+return (
 
 
   <>

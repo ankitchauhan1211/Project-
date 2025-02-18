@@ -8,11 +8,16 @@ export default function Login({handlelogin}) {
   const [number,setNumber]=useState('');
   const [color,setColor]=useState('#1c1c1c66');
   const [error,setError]= useState(null);
-
+  const [token,setToken]=useState('')
+  
   
   const numstart = number.split('')
   if(numstart[0]<=5){
      setNumber('')
+  }
+
+  if(isNaN(number)){
+    setNumber('')
   }
   
 
@@ -42,6 +47,7 @@ export default function Login({handlelogin}) {
   const submit =async ()=>{
   // localStorage.setItem('number',number)
   // localStorage.setItem('otp',JSON.stringify(otp))
+ if( number.length==10){
 
             try {
                   const response = await fetch('http://vts.techveda.consulting/api/auth/user/login', {
@@ -53,17 +59,18 @@ export default function Login({handlelogin}) {
                   console.log(data)
                   
                   if(!response.ok){
-                      throw new Error(data.message || "Invalid response");
+                      throw new Error(alert(data.message) || alert("Invalid response"));
+
                   }
-                  localStorage.setItem('token', data.json.data.identification_token);
-                   const token=localStorage.getItem('token')
-                   console.log("token",token)
-          
-                  console.log(data);
+
+                  handlelogin(data.json.data.identification_token,number) ;
+                  
+              
               } catch (error) {
                   console.log(error.message);
               }
-    handlelogin(number)
+            }
+        
 
               // 9999223772 phone number to call
 
